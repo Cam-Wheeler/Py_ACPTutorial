@@ -1,9 +1,9 @@
 # Standard Lib Imports:
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 
 # Local Imports:
-from .lng_lat import LatLng
+from .lat_lng import LatLng
 from .pizza import Pizza
 
 
@@ -21,4 +21,4 @@ class Restaurant:
     name: str
     location: LatLng
     opening_days: list[Weekday]
-    pizzas: list[Pizza]
+    menu: list[Pizza]
