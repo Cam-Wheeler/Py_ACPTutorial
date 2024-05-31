@@ -3,6 +3,7 @@ import os
 import re
 import json
 from dataclasses import asdict
+from typing import Any
 
 # Package Imports:
 from flask import (
@@ -17,12 +18,12 @@ from acptutorialpy.data.student import Student
 bp = Blueprint('simple_blueprint', __name__)
 
 @bp.route("/isAlive")
-def isalive():
+def isalive() -> str:
     """Checks if the server is running."""
     return "I am running!"
 
 @bp.route("/studentID/<string:id>", methods=["GET"])
-def test_path_variable(id):
+def test_path_variable(id) -> str:
     """
     Given a student ID passed into the endpoint, returns the student ID back.
     
@@ -35,7 +36,7 @@ def test_path_variable(id):
     return f"Your Student ID is: {id}"
 
 @bp.route("/postBody", methods=["POST"])
-def test_post_with_body():
+def test_post_with_body() -> dict[str, str] | Response:
     """
     Collects parameters from the body of the request creates a Student, logs the attributes and returns the posted object.
     
@@ -48,7 +49,6 @@ def test_post_with_body():
     Returns:
         dict: A dictionary with the attributes of the Student.
     """
-
     # If the request header is application/json, try make the student.
     try:
         student = Student(**request.json)
@@ -59,7 +59,7 @@ def test_post_with_body():
     return asdict(student)
 
 @bp.route("/postQuery", methods=["POST"])
-def test_post_with_query():
+def test_post_with_query() -> str:
     """
     Collects parameters from the query string in the request and prints them.
     
@@ -74,7 +74,7 @@ def test_post_with_query():
     param_2 = request.args.get("param2")
     return f"You have posted in the query parameters: Param 1: {param_1}, Param 2: {param_2}"   
 
-def from_camel_to_snake(dict_to_convert: dict):
+def from_camel_to_snake(dict_to_convert: dict[Any, Any]) -> dict[Any, Any]:
     """
     Converts camelCase keys into snake_case keys in a dictionary so any code generated in Java will work
     with Python snakecase.
@@ -96,9 +96,9 @@ def from_camel_to_snake(dict_to_convert: dict):
     return dict_to_convert
 
 @bp.route("/restaurants", methods=["GET"])
-def get_restaurants():
+def get_restaurants() -> list[Restaurant] | Response:
     """
-    Returns a response body with all the restaurants we have stored in our JSON file
+    Returns a response body with all the restaurants we have stored in the JSON file in our resources.
 
     Returns:
         list[Restaurant]: A list of Restaurant objects.
