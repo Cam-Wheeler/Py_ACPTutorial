@@ -18,7 +18,7 @@ from acptutorialpy.data.student import Student
 bp = Blueprint('simple_blueprint', __name__)
 
 @bp.route("/isAlive")
-def isalive() -> str:
+def is_alive() -> str:
     """Checks if the server is running."""
     return "I am running!"
 
@@ -58,8 +58,8 @@ def test_post_with_body() -> dict[str, str] | Response:
     current_app.logger.info(f"Student Posted in body of request: {student}")
     return asdict(student)
 
-@bp.route("/postQuery", methods=["POST"])
-def test_post_with_query() -> str:
+@bp.route("/getQuery", methods=["GET"])
+def test_get_with_query() -> str:
     """
     Collects parameters from the query string in the request and prints them.
     
