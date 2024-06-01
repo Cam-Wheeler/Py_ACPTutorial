@@ -113,13 +113,4 @@ def get_restaurants() -> list[Restaurant] | Response:
     except FileNotFoundError as error:
         return Response("No restaurants found", status=404)
     
-@bp.route("/storeBlob", methods=["POST"])
-def query_service():
-    """
-    Query another service and return the response
-    Note: It's a free server on azure so its slow!
-    """
-    pass    
-
-
 
