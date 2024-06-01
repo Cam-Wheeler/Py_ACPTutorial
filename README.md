@@ -23,6 +23,8 @@ Within our `simple_blueprint.py` file, we have a simple blueprint with some endp
 - `test_get_with_query` - Uses query parameters to return a message, [we could also use POST](https://stackoverflow.com/questions/611906/http-post-with-url-query-parameters-good-idea-or-not) with query parameters, but since our endpoint is idempotent (we can make the same request again and again, nothing changes server side), we use GET.
 - `get_restaurants` - Will return a list of restaurants in the response body. An example of what a response can look like to requests asking for data. 
 
+Note: These are the functions that are being called and not the endpoints themselves, the endpoints are defined in the `@bp.route()` decorator.
+
 ### The Dockerfile
 
 The Dockerfile dictates to docker what needs to be done to create our image. The comments should guide you through what is happening at each step.
